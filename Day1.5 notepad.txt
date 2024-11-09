@@ -1,0 +1,122 @@
+
+Virtualization: The king is dead
+root
+C1sc0123
+rm - r -  /etc/udev/rules.d/70-"tab"
+reboot
+
+
+@D1:
+config t
+int range e0/1,e0/2
+ switchport trunk encap dot1Q
+ switchport mode trunk
+ switchport trunk allowed vlan 1-99
+ Channel-group 10 mode active
+ Channel-protocol LACP
+
+int range e0/0,e0/3
+ switchport trunk encap dot1Q
+ switchport mode trunk
+ switchport trunk allowed vlan 1-99
+ Channel-group 20 mode active
+ Channel-protocol LACP
+
+int range e1/2,e1/3
+ switchport trunk encap dot1Q
+ switchport mode trunk
+ switchport trunk allowed vlan 1-99
+ Channel-group 30 mode active
+ Channel-protocol LACP
+
+=======
+
+@D2:
+config t
+int range e0/0,e0/3
+ switchport trunk encap dot1Q
+ switchport mode trunk
+ switchport trunk allowed vlan 1-99
+ Channel-group 25 mode active
+ Channel-protocol LACP
+
+int range e0/1,e0/2
+ switchport trunk encap dot1Q
+ switchport mode trunk
+ switchport trunk allowed vlan 1-99
+ Channel-group 15 mode active
+ Channel-protocol LACP
+
+int range e1/2,e1/3
+ switchport trunk encap dot1Q
+ switchport mode trunk
+ switchport trunk allowed vlan 1-99
+ Channel-group 30 mode active
+ Channel-protocol LACP
+
+====
+
+@A2:
+config t
+int range e0/1,e0/2
+ switchport trunk encap dot1Q
+ switchport mode trunk
+ switchport trunk allowed vlan 1-99
+ Channel-group 20 mode active
+ Channel-protocol LACP
+
+int range e0/0,e0/3
+ switchport trunk encap dot1Q
+ switchport mode trunk
+ switchport trunk allowed vlan 1-99
+ Channel-group 25 mode active
+ Channel-protocol LACP
+
+====
+
+@A1
+config t
+int range e0/1,e0/2
+ switchport trunk encap dot1Q
+ switchport mode trunk
+ switchport trunk allowed vlan 1-99
+ Channel-group 10 mode active
+ Channel-protocol LACP
+
+int range e1/0,e0/3
+ switchport trunk encap dot1Q
+ switchport mode trunk
+ switchport trunk allowed vlan 1-99
+ Channel-group 15 mode active
+ Channel-protocol LACP
+
+
+====
+
+D1/D2
+config t
+vtp domain ccnp
+vtp password encor
+vtp mode server
+exit
+
+A1/A2
+config t
+vtp domain ccnp
+vtp password encor
+vtp mode client
+exit
+
+====
+D1: Gawa vlan:
+conf t
+vlan 10
+name ENDPOINTS
+vlan 20
+name SERVERS
+vlan 200
+name DMZ
+exit
+
+A1/A2
+sh vlan br
