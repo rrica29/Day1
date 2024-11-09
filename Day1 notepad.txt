@@ -1,0 +1,38 @@
+git clone https://github.com/rivancorp/CCNPent
+
+ReviewTask
+30        28
+011 110 | 011 100
+AF33      AF32
+
+CCNPencorSkillno.2: if you dont know this, you wil be bagsak
+Gi1: 10.75.23.5/12 2nd octet
+Gi: 192.167.100.50/27 4th octet
+What is the eigrp, ospg, bgp command
+
+
+Task 3
+git clone https://github.com/rivancorp/devop
+
+QoSConfigure: improve voip
+how ? : cm -pm -sp:
+real time transfer protocol
+classMap -> policyMap -> servicePolicy
+conf t
+class-map match any VOICE
+ match ip dscp ef
+ match protocol rtp audio   
+Policy-map QoS-VOIP
+ class VOICE
+  priority 10000
+  ser dscp ef
+ class class-default
+  fair-queue
+ int fa0/0
+  service-policy output QoS-VOIP
+end
+
+if you are nagmamadali
+conf t
+int fa 0/0 
+auto qos voip
