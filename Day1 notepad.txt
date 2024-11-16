@@ -36,3 +36,6 @@ if you are nagmamadali
 conf t
 int fa 0/0 
 auto qos voip
+
+
+https://bit.ly/rivan-sdwan_gg?fbclid=IwZXh0bgNhZW0CMTAAAR3gKLPJnDL-E6ab5jBIJtZZj92Em9Wu1SYoavLYB0a_UzbQC5TfSYOs0JY_aem_W09R0YVl2XfEL5ycQfTJog
